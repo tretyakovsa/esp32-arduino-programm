@@ -8,10 +8,8 @@ void FS_init(void) {
       while(file){
           String fileName = file.name();
           size_t fileSize = file.size();
-          DBG_OUTPUT_PORT.printf("FS File: %s, size: %s\n", fileName.c_str(), formatBytes(fileSize).c_str());
           file = root.openNextFile();
       }
-      DBG_OUTPUT_PORT.printf("\n");
   }
 
 
@@ -53,8 +51,7 @@ void FS_init(void) {
     HTTP.send(200, "text/json", json);
     json = String();
   });
-  HTTP.begin();
-  DBG_OUTPUT_PORT.println("HTTP server started");
+
 
 }
 //format bytes
@@ -112,7 +109,7 @@ bool exists(String path){
 }
 
 bool handleFileRead(String path) {
-  DBG_OUTPUT_PORT.println("handleFileRead: " + path);
+
   if (path.endsWith("/")) {
     path += "index.htm";
   }
@@ -140,11 +137,9 @@ void handleFileUpload() {
     if (!filename.startsWith("/")) {
       filename = "/" + filename;
     }
-    DBG_OUTPUT_PORT.print("handleFileUpload Name: "); DBG_OUTPUT_PORT.println(filename);
     fsUploadFile = FILESYSTEM.open(filename, "w");
     filename = String();
   } else if (upload.status == UPLOAD_FILE_WRITE) {
-    //DBG_OUTPUT_PORT.print("handleFileUpload Data: "); DBG_OUTPUT_PORT.println(upload.currentSize);
     if (fsUploadFile) {
       fsUploadFile.write(upload.buf, upload.currentSize);
     }
@@ -152,7 +147,7 @@ void handleFileUpload() {
     if (fsUploadFile) {
       fsUploadFile.close();
     }
-    DBG_OUTPUT_PORT.print("handleFileUpload Size: "); DBG_OUTPUT_PORT.println(upload.totalSize);
+
   }
 }
 
@@ -161,7 +156,7 @@ void handleFileDelete() {
     return HTTP.send(500, "text/plain", "BAD ARGS");
   }
   String path = HTTP.arg(0);
-  DBG_OUTPUT_PORT.println("handleFileDelete: " + path);
+
   if (path == "/") {
     return HTTP.send(500, "text/plain", "BAD PATH");
   }
@@ -178,7 +173,7 @@ void handleFileCreate() {
     return HTTP.send(500, "text/plain", "BAD ARGS");
   }
   String path = HTTP.arg(0);
-  DBG_OUTPUT_PORT.println("handleFileCreate: " + path);
+
   if (path == "/") {
     return HTTP.send(500, "text/plain", "BAD PATH");
   }
@@ -202,7 +197,7 @@ void handleFileList() {
   }
 
   String path = HTTP.arg("dir");
-  DBG_OUTPUT_PORT.println("handleFileList: " + path);
+
 
 
   File root = FILESYSTEM.open(path);

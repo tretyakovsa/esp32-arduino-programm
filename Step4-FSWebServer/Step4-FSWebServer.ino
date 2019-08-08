@@ -11,7 +11,7 @@
 #define FILESYSTEM SPIFFS
 // You only need to format the filesystem once
 #define FORMAT_FILESYSTEM false
-#define DBG_OUTPUT_PORT Serial
+
 
 #if FILESYSTEM == FFat
 #include <FFat.h>
