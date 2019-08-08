@@ -4,7 +4,7 @@
  */
 #include <WiFi.h>        //Содержится в пакете. Видео с уроком http://esp8266-arduinoide.ru/step1-wifi
 #include <WebServer.h>   //Содержится в пакете. Видео с уроком http://esp8266-arduinoide.ru/step2-webserver
-#include <ESP32SSDP.h>        //Содержится в пакете. Видео с уроком http://esp8266-arduinoide.ru/step3-ssdp
+#include <ESP32SSDP.h>        //https://github.com/luc-github/ESP32SSDP
 //#include <FS.h>                 //Содержится в пакете. Видео с уроком http://esp8266-arduinoide.ru/step4-fswebserver
 
 #define FILESYSTEM SPIFFS
